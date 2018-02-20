@@ -1,0 +1,11 @@
+//responsive images notes
+
+
+css calc((100% - 20px) / 3) //take the available space, divide by 3 and add margin
+max-width: 100% // on pictures let them not grow larger than orig pixels
+
+vh / vw
+vmin / vmax for either what's smaller / larger
+
+height: 100vmin;     width: 100vmin;  // both combined
+height: 100vmax;     width: 100vmax;  //both combined
