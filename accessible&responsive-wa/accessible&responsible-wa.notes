@@ -21,6 +21,7 @@ tree . //list directory tree
 xdg-open someFile //opens file with prefered programm
 
 
+----------------------------------------------------------------
 background-size: cover; // for background images which unknown size
 (background-repeat: no-repeat;)
 
@@ -89,7 +90,7 @@ or not showing when smaller screen size:
       background-image: url(koala_crop.jpg);
     }
   }
-
+---------------------------------------------
 
   unicode instead of img where possible
 
@@ -98,3 +99,23 @@ or not showing when smaller screen size:
 
 
   [class*='zocial-'] // all elements with class beginning...
+
+
+
+  LINELENGTH!!!!!!!!!!!!! FOR BREAKPOINT CONSIDERATION
+  65 characters per line (cpl) is considered best line-length
+  for reading
+
+  base-font at least 16px
+  line-height: 1.2em;
+
+  maybe even 18px // 1.25em
+
+use MINOR breakpoints to adjust margin and font size
+
+  contained table:
+
+  containingTableDivWrapper{
+    width: 100%;
+    overflow-x: auto;
+  }                       // enables scrolling horizontally
