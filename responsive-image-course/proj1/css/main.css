@@ -1,0 +1,33 @@
+/*
+
+Your styles go here!
+
+Hint! You'll probably want to start by styling:
+  * <body>
+  * <article>
+  * <h1>
+  * <img>
+
+I've left some boilerplate below for you.
+
+*/
+
+/* body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+} */
+
+article {
+  width: 50em;
+  /*  50 * 16px = 800px  */
+}
+
+h1 {
+
+}
+
+img {
+  max-width: 100%;
+}
