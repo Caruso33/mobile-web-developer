@@ -8,36 +8,38 @@ var eslint = require('gulp-eslint');
 var jasmine = require('gulp-jasmine-phantom');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+var babel = require('gulp-babel');
 
-gulp.task(
-	'dist',
-	gulp.parallel('copy-html', 'copy-images', 'styles', 'lint', 'scripts-dist')
-);
-
-gulp.task('scripts', function() {
+gulp.task('scripts', done => {
 	gulp
 		.src('js/**/*.js')
+		.pipe(babel())
 		.pipe(concat('all.js'))
 		.pipe(gulp.dest('dist/js'));
+	done();
 });
 
-gulp.task('scripts-dist', function() {
+gulp.task('scripts-dist', function(done) {
 	gulp
 		.src('js/**/*.js')
+		.pipe(babel())
 		.pipe(concat('all.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest('dist/js'));
+	done();
 });
 
-gulp.task('copy-html', function() {
+gulp.task('copy-html', function(done) {
 	gulp.src('./index.html').pipe(gulp.dest('./dist'));
+	done();
 });
 
-gulp.task('copy-images', function() {
+gulp.task('copy-images', function(done) {
 	gulp.src('img/*').pipe(gulp.dest('dist/img'));
+	done();
 });
 
-gulp.task('styles', function() {
+gulp.task('styles', function(done) {
 	gulp
 		.src('sass/**/*.scss')
 		.pipe(
@@ -52,6 +54,7 @@ gulp.task('styles', function() {
 		)
 		.pipe(gulp.dest('dist/css'))
 		.pipe(browserSync.stream());
+	done();
 });
 
 gulp.task('lint', function() {
@@ -70,24 +73,30 @@ gulp.task('lint', function() {
 	);
 });
 
-gulp.task('tests', function() {
+gulp.task('tests', function(done) {
 	gulp.src('tests/spec/extraSpec.js').pipe(
 		jasmine({
 			integration: true,
 			vendor: 'js/**/*.js'
 		})
 	);
+	done();
 });
 
 gulp.task(
+	'dist',
+	gulp.parallel('copy-html', 'copy-images', 'styles', 'lint', 'scripts-dist')
+);
+
+gulp.task(
 	'default',
-	gulp.task('tests'),
-	// gulp.parallel('copy-html', 'copy-images', 'styles', 'lint', 'scripts'),
+	gulp.parallel('copy-html', 'copy-images', 'styles', 'lint', 'scripts'),
 	function() {
 		gulp.watch('sass/**/*.scss', gulp.task('styles'));
 		gulp.watch('js/**/*.js', gulp.task('lint'));
 		gulp.watch('/index.html', gulp.task('copy-html'));
 		gulp.watch('./dist/index.html').on('change', browserSync.reload);
+		gulp.watch('./build/index.html').on('change', browserSync.reload);
 
 		browserSync.init({
 			server: './dist'
