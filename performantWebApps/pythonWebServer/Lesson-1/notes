@@ -1,0 +1,33 @@
+#
+ncat localhost 9999
+ncat -l localhost 9999
+
+#
+python3 -m http.server 8000
+#
+host www.google.com
+#
+nslookup www.google.com
+
+#
+ncat 127.0.0.1 8000
+
+GET / HTTP/1.1
+Host: localhost
+
+#
+ncat -l 9999
+
+HTTP/1.1 307 Temporary Redirect
+Location: https://www.eff.org/
+
+#
+ncat -l 9999
+
+HTTP/1.1 200 OK
+Content-type: text/plain
+Content-length: 50
+
+Hello, browser! I am a real HTTP server, honestly!
+
+#
